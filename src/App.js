@@ -75,9 +75,26 @@ class App extends Component {
     this.setState(stateClone);
   };
 
-  onClickLink = (source, target) => {
-    window.alert(`Clicked link between ${source} and ${target}`);
-  };
+  //   /**
+  //    * Not part of the initial requirements, future possible feature
+  //    * @param source
+  //    * @param target
+  //    */
+  // onClickLink = (source, target) => {
+  //     let stateClone = {...this.state},
+  //         sourceTargetArray = [source, target].sort(),
+  //         sourceTargetString = JSON.stringify((sourceTargetArray));//
+  //
+  //     let filteredLinks = stateClone.links.filter(link => {
+  //             let orderedString= JSON.stringify([link.source, link.target].sort());
+  //             return link.color === undefined
+  //             && sourceTargetString !== orderedString
+  //         }
+  //     );
+  //
+  //     stateClone.links = filteredLinks;
+  //     this.setState(stateClone);
+  // };
 
   /**
    * remove color property from all nodes (except default 0 node, needs to stay 'transparent')
@@ -139,6 +156,7 @@ class App extends Component {
 
     this.deselectAllNodes(stateClone);
 
+    // remove default link to the default node
     stateClone.links = linksClone;
 
     this.setState(stateClone);
