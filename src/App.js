@@ -191,13 +191,32 @@ class App extends Component {
     };
 
     return (
-        <Graph
-            id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
-            data={data}
-            config={myConfig}
-            onClickNode={this.onClickNode}
-            onClickLink={this.onClickLink}
-        />
+        <div>
+            <form>
+                <input type="text" id="node-input"/>
+                <button type="submit"
+                    onClick={
+                        (event) => {
+                            event.preventDefault();
+                            let value = document.getElementById("node-input").value;
+                            if (value === "") {
+                                return;
+                            }
+                            this.addNewNode(value);
+                        }
+                    }
+                >
+                    Add Node
+                </button>
+            </form>
+            <Graph
+                id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
+                data={data}
+                config={myConfig}
+                onClickNode={this.onClickNode}
+                onClickLink={this.onClickLink}
+            />
+        </div>
     );
   }
 }
