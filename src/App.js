@@ -8,8 +8,8 @@ class App extends Component {
     super();
 
     this.state = {
-    nodes: [{id: '', color: 'transparent'}, {id: 'Harry'}, {id: 'Sally'}, {id: 'Alice'}],
-    links: [{source: 'Harry', target: 'Sally', highlightColor: "blue"}, {source: 'Harry', target: 'Alice'}],
+    nodes: [{id: '', color: 'transparent'}],
+    links: [],
     selected: null,
     }
   }
@@ -22,6 +22,11 @@ class App extends Component {
     let stateClone = {...this.state};
     let nodesClone = [...stateClone.nodes];
     let linksClone = [...stateClone.links];
+
+    // check if we already have this node
+    if (nodesClone.filter( node => node.id === name).length > 0) {
+        return;
+    }
 
     // add by name
     nodesClone.push({id: name});
@@ -41,7 +46,13 @@ class App extends Component {
     stateClone.links = linksClone;
 
     // replace state with updated clone
-    this.setState(stateClone);
+    this.setState(stateClone, () => {
+        // filter out the invisible link
+        setTimeout(() => {
+            console.log("removing invisible link");
+            this.setState({links: this.state.links.filter(links => links.target !== "")});
+        }, 750);
+    });
   };
 
   /**
