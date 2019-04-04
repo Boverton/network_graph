@@ -148,8 +148,19 @@ class App extends Component {
    * @param target String
    */
   addLink(source, target) {
-    let stateClone = {...this.state};
-    let linksClone = [...stateClone.links];
+    let stateClone = {...this.state},
+        linksClone = [...stateClone.links];
+
+      let newArrayString = JSON.stringify([source, target].sort());
+
+      let duplicates = linksClone.filter( link => {
+          let orderedLinks = JSON.stringify([link.source, link.target].sort());
+          return newArrayString === orderedLinks;
+      });
+
+      if (duplicates.length > 0) {
+          return;
+      }
 
     // add new connection to copy of link
     linksClone.push({source: source, target: target});
