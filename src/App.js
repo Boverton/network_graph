@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Graph } from 'react-d3-graph';
 import './App.css';
+import GraphContainer from "./components/GraphContainer";
 
 class App extends Component {
 
@@ -180,16 +180,6 @@ class App extends Component {
       links: this.state.links
     };
 
-    // the graph configuration, you only need to pass down properties
-    // that you want to override, otherwise default ones will be used
-    const myConfig = {
-      nodeHighlightBehavior: false,
-      node: {
-        color: 'lightgreen',
-        size: 120,
-      },
-    };
-
     return (
         <div>
             <form>
@@ -209,12 +199,9 @@ class App extends Component {
                     Add Node
                 </button>
             </form>
-            <Graph
-                id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
+            <GraphContainer
                 data={data}
-                config={myConfig}
                 onClickNode={this.onClickNode}
-                onClickLink={this.onClickLink}
             />
         </div>
     );
