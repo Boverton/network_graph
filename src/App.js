@@ -46,13 +46,7 @@ class App extends Component {
     stateClone.links = linksClone;
 
     // replace state with updated clone
-    this.setState(stateClone, () => {
-        // filter out the invisible link
-        setTimeout(() => {
-            console.log("removing invisible link");
-            this.setState({links: this.state.links.filter(links => links.target !== "")});
-        }, 750);
-    });
+    this.setState(stateClone);
   };
 
   /**
