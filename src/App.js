@@ -8,9 +8,10 @@ class App extends Component {
     super();
 
     this.state = {
-    nodes: [{id: '', color: 'transparent'}],
-    links: [],
-    selected: null,
+        nodes: [{id: '', color: 'transparent'}],
+        links: [],
+        selected: null,
+        nodeNameInput: '',
     }
   }
 
@@ -44,6 +45,7 @@ class App extends Component {
     // pull mutated node/link arrays back onto the copy of the state
     stateClone.nodes = nodesClone;
     stateClone.links = linksClone;
+    stateClone.nodeNameInput = '';
 
     // replace state with updated clone
     this.setState(stateClone);
@@ -67,6 +69,23 @@ class App extends Component {
     }
 
     this.setState(stateClone);
+  };
+
+  submitNodeName = (event) => {
+      event.preventDefault();
+      let value = document.getElementById("node-name-input").value.toUpperCase().trim();
+      if (value === "") {
+          return;
+      }
+      this.addNewNode(value);
+  };
+
+  updateInputValue = () => {
+    let value = document.getElementById('node-name-input').value
+        .replace(/[^a-zA-Z0-9]/g, '')
+        .toUpperCase();
+
+    this.setState({nodeNameInput: value})
   };
 
   //   /**
@@ -176,23 +195,26 @@ class App extends Component {
 
     return (
         <div>
-            <form>
-                <input type="text" id="node-input"/>
-                <button type="submit"
-                    onClick={
-                        (event) => {
-                            event.preventDefault();
-                            let value = document.getElementById("node-input").value;
-                            if (value === "") {
-                                return;
-                            }
-                            this.addNewNode(value);
-                        }
-                    }
-                >
-                    Add Node
-                </button>
-            </form>
+            <div id="header">
+                <span>
+                    Welcome To Your Graph
+                </span>
+                <form>
+                    <input
+                        type="text"
+                        id="node-name-input"
+                        value={this.state.nodeNameInput}
+                        onChange={this.updateInputValue}
+                        placeholder="Add a node here"
+                        autoComplete="off"
+                    />
+                    <button type="submit"
+                        onClick={(event) => this.submitNodeName(event)}
+                    >
+                        Add Node
+                    </button>
+                </form>
+            </div>
             <GraphContainer
                 data={data}
                 onClickNode={this.onClickNode}
