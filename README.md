@@ -1,3 +1,21 @@
+## Ways to view
+
+## `github Pages`
+
+Deployed to github pages.  
+
+It can be viewed at [https://boverton.github.io/network_graph/](https://boverton.github.io/network_graph/)
+
+## `local`
+
+1. git clone https://github.com/Boverton/network_graph.git brandon_graph
+2. cd brandon_graph
+3. npm install
+4. npm start
+5. Then within a browser go to http://localhost:3000/
+
+- - - -
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
