@@ -71,16 +71,26 @@ class App extends Component {
     this.setState(stateClone);
   };
 
+    /**
+     * Use the nodeNameInput to create a new node
+     *
+     * @param event
+     */
   submitNodeName = (event) => {
       event.preventDefault();
-      let value = document.getElementById("node-name-input").value.toUpperCase().trim();
+      let value = this.state.nodeNameInput;
+      // don't add node if empty
       if (value === "") {
           return;
       }
       this.addNewNode(value);
   };
 
+    /**
+     * keep state in sync with the node-name-input input field
+     */
   updateInputValue = () => {
+    // keep it alpha/numeric with no spaces and uppercase.
     let value = document.getElementById('node-name-input').value
         .replace(/[^a-zA-Z0-9]/g, '')
         .toUpperCase();
